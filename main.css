@@ -1,0 +1,50 @@
+div {
+    text-align: center;
+    font-family: verdana;
+    font-size: 40px;
+    transition: linear 2s;
+}
+
+tr {
+    text-align: center;
+}
+
+label {
+    font-size: 24px;
+    font-family: monospace;
+}
+
+#name {
+    font-size: 36;
+    font-family: sans-serif;
+}
+
+#info {
+    font-size: 24px;
+    font-family: monospace;
+}
+
+input {
+    width: 8%;
+    height: 30px;
+}
+
+#symbol {
+    text-align: center;
+    font-family: verdana;
+    font-size: 40px;
+}
+
+#config {
+    padding-top: 20px;
+    font-family: monospace;
+    line-height: 120%;
+}
+
+img {
+    padding-top: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
