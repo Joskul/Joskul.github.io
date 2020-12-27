@@ -1,50 +1,89 @@
-div {
-    text-align: center;
-    font-family: verdana;
-    font-size: 40px;
-    transition: linear 2s;
-}
-
-tr {
-    text-align: center;
-}
-
-label {
-    font-size: 24px;
-    font-family: monospace;
-}
-
-#name {
-    font-size: 36;
-    font-family: sans-serif;
-}
-
-#info {
-    font-size: 24px;
-    font-family: monospace;
+#guide {
+    font-size: 36px;
 }
 
 input {
-    width: 8%;
     height: 30px;
+    margin-top: 0px;
+    border-radius: 4px;
+    font-size: 30px;
+    color: #FF4200FF;
 }
 
-#symbol {
-    text-align: center;
-    font-family: verdana;
-    font-size: 40px;
+.table,
+table {
+    display: table;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-#config {
-    padding-top: 20px;
-    font-family: monospace;
-    line-height: 120%;
+.tr {
+    display: table-row;
 }
 
-img {
-    padding-top: 10%;
+.center {
+    margin: auto;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #4B4B4BFF;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
+    right: 0;
+}
+
+#pdt {
+    border: 0px;
+}
+
+#items {
+    background-color: white;
+    border-radius: 2px;
+    border: 2px;
+}
+
+#items:hover {
+    background-color: #4B4B4BFF;
+    border-radius: 2px;
+    border: 2px;
+    cursor: pointer;
+}
+
+#tdnull {
+    background-color: transparent;
+    border: 0px;
+}
+
+.topic {
+    background-color: #4B4B4BFF;
+    border-radius: 1.5px;
+    font-size: 24px;
+    color: #FF9001FF;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.topicWrapper {
+    width: 95%;
+    display: inline-block;
+    margin: 10px;
+}
+
+.content {
+    background-color: white;
+    border-radius: 1.5px;
+    font-size: 18px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    width: 99%;
 }

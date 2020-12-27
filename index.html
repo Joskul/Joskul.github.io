@@ -1,36 +1,83 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<script src="PeriodicTableJSON.js"></script>
-<script>
-function setup(){
-    var options = '';
-    for(var i = 0; i < elements.length; i++)
-    options += '<option value="'+elements[i].symbol+'" />';
-    document.getElementById('elem').innerHTML = options;
-}
-</script>
-<link rel="stylesheet" href="main.css">
+    <title>Periodic Table Toolkit</title>
+    <link rel="icon" href="favicon.ico">
+    <style>
+        @font-face {
+            font-family: codesaver;
+            src: url('CodeSaver-Regular.otf');
+        }
+        
+        * {
+            font-family: codesaver;
+        }
+    </style>
+    <script src="PeriodicTableJSON.js"></script>
+    <script>
+        function setup() {
+            var options = '';
+            for (var i = 0; i < elements.length; i++)
+                options += '<option value="' + elements[i].symbol + '" />';
+            document.getElementById('elem').innerHTML = options;
+            generateTable();
+        }
+    </script>
+    <link rel="stylesheet" href="main.css">
 </head>
 
-<body onload="setup()">
-    <script src="script.js"></script>
+<body onload="setup(); update('H'); document.getElementById('bgm').play()" style="background-color:#4B4B4BFF;">
     <datalist id="elem"></datalist>
-    <label for='X'>Symbol</label><input id="X" list="elem" onchange="cX()" value = ''><br>
-    <label for='Z'>Number</label><input id="Z" autocomplete="off" type="number" onchange="cZ()" min="1" max="119" value="0">
-    <table>
-        <tr>
-            <div id='mass_number'><div>
-        </tr>
-        <tr>
-            <div id='symbol'></div>
-        </tr>
-        <tr>
-            <div id='atomic_number'><div>
-        </tr>
-    </table>
-    <div id='name'></div><br>
-    <div id='info'></div>
-    <div id='config'></div>
-    <img src='https://ptable.com/image/periodic-table.svg' width="40%" height="40%" align="center">
+    <script src="script.js"></script>
+    <div class="table center" align=center border=0px id="content" style="background-color:#C4C4C4FF; width:80%;">
+        <div class="tr" style="column-span:3">
+            <div style="font-size:48px; text-align:center; color:#FF4200FF; background-color:rgb(31, 31, 31)">Periodic table toolkit</div>
+        </div>
+        <div id="guide" class="tr" style="background-color:#4B4B4BFF; font-size:30px; vertical-align:middle;">
+            <div style="float: left; width:30%; color:#FF9001FF;">Select an element: </div>
+            <div style="float: left; width:30%; color:#C4C4C4FF;"><label for='X'>Symbol:<br></label><input id="X" list="elem" onchange="update(0,'X')" value='' size='5'></div>
+            <div style="float: left; width:30%; color:#C4C4C4FF;"><label for='Z'>Atomic number:<br></label><input id="Z" autocomplete="off" type="number" onchange="update(0,'Z')" min="1" max="119" value="" size='5'></div>
+            <div style="float: left; width:10%; color:#FF4200FF; border-radius:4px;" class="dropdown">
+                ▼
+                <div class="dropdown-content">
+                    <table align=center border=2 class="notranslate">
+                        <b><tbody id="pdt" style="background-color:#C4C4C4FF; border:0px;">
+            
+                    </tbody></b>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="content" class="tr">
+            <div style="float:left; width:50%; height:800px; font-size:48px; background-image:url(mainbg.jpg); background-size: cover;" id="left_panel">
+                <div style="height:25%; background-color:rgba(75, 75, 75, 0.795); color:#FF4200FF;">
+                    Atomic number
+                    <div id="atomic_number" style='color:#C4C4C4FF;'></div>
+                </div>
+                <div style="height:50%; padding: .5rem; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);" id="symbol"></div>
+                <div style="height:25%; background-color:rgba(75, 75, 75, 0.795); color:#FF4200FF;">
+                    <div id="mass_number" style='color:#C4C4C4FF;'></div>
+                    Mass Number
+                </div>
+            </div>
+            <div style="float:right; width:50%; background-color:#C4C4C4FF; overflow-y:visible;">
+                <div class="topicWrapper">
+                    <div class="topic">Configuration</div>
+                    <div class="content" id="config"></div>
+                </div>
+                <div class="topicWrapper">
+                    <div class="topic">Basic info</div>
+                    <div class="content">WIP comeback soon :)</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <audio id="audio " src="click.mp3 "></audio>
+    <audio id="bgm " src="bgm.mp3 "></audio>
 </body>
+
 </html>
