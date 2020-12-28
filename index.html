@@ -36,39 +36,77 @@
         </div>
         <div id="guide" class="tr" style="background-color:#4B4B4BFF; font-size:30px; vertical-align:middle;">
             <div style="float: left; width:30%; color:#FF9001FF;">Select an element: </div>
-            <div style="float: left; width:30%; color:#C4C4C4FF;"><label for='X'>Symbol:<br></label><input id="X" list="elem" onchange="update(0,'X')" value='' size='5'></div>
-            <div style="float: left; width:30%; color:#C4C4C4FF;"><label for='Z'>Atomic number:<br></label><input id="Z" autocomplete="off" type="number" onchange="update(0,'Z')" min="1" max="119" value="" size='5'></div>
-            <div style="float: left; width:10%; color:#FF4200FF; border-radius:4px;" class="dropdown">
-                ▼
+            <div style="float: left; width:max-content; color:#C4C4C4FF;"><label for='Z'>Atomic Number<br></label><input id="Z" autocomplete="off" type="number" onchange="update(0,'Z')" min="1" max="119" value="" size='5'></div>
+            <div style="float: left; width:30%; color:#C4C4C4FF;"><label for='X'>Symbol<br></label><input id="X" list="elem" onchange="update(0,'X')" value='' size='5'></div>
+            <div style="float: right; width:auto; color:white;" class="dropdown">
+                Periodic table ▼
                 <div class="dropdown-content">
                     <table align=center border=2 class="notranslate">
-                        <b><tbody id="pdt" style="background-color:#C4C4C4FF; border:0px;">
-            
-                    </tbody></b>
+                        <b><tbody id="pdt" style="background-color:#C4C4C4FF; border:0px;"></tbody></b>
                     </table>
                 </div>
             </div>
         </div>
         <div id="content" class="tr">
             <div style="float:left; width:50%; height:800px; font-size:48px; background-image:url(mainbg.jpg); background-size: cover;" id="left_panel">
-                <div style="height:25%; background-color:rgba(75, 75, 75, 0.795); color:#FF4200FF;">
+                <div style="height:23%; background-color:rgba(75, 75, 75, 0.795); color:#FF4200FF;">
                     Atomic number
                     <div id="atomic_number" style='color:#C4C4C4FF;'></div>
                 </div>
-                <div style="height:50%; padding: .5rem; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);" id="symbol"></div>
+
+                <div style="height:50%; padding: .5rem; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); font-variant: inherit;" id="symbol"></div>
+
                 <div style="height:25%; background-color:rgba(75, 75, 75, 0.795); color:#FF4200FF;">
                     <div id="mass_number" style='color:#C4C4C4FF;'></div>
                     Mass Number
                 </div>
             </div>
-            <div style="float:right; width:50%; background-color:#C4C4C4FF; overflow-y:visible;">
+            <div style="float:right; width:50%; max-height:800px; background-color:#C4C4C4FF; overflow-y:scroll; overflow-x:hidden">
+                <div class="elemTitle">
+                    <a id="elemname"></a>
+                    <div id="box"></div>
+                    <div id="category"></div>
+                </div>
+                <div class="topicWrapper">
+                    <div class="topic">General Info</div>
+                    <div class="content" id="info" align="left">
+                        <div class="subwrap">
+                            <div class="info-l">Electronegativity</div>
+                            <div class="info-r" id="en"></div>
+                        </div>
+                        <div class="subwrap">
+                            <div class="info-l">Electron Affinity</div>
+                            <div class="info-r" id="ea"></div><br>
+                        </div>
+                        <div class="subwrap">
+                            <div class="info-l">Melting Point</div>
+                            <div class="info-r" id="mp"></div>
+                        </div>
+                        <div class="subwrap">
+                            <div class="info-l">Boiling Point</div>
+                            <div class="info-r" id="bp"></div><br>
+                        </div>
+                        <div class="subwrap">
+                            <div class="info-l">Molar Heat</div>
+                            <div class="info-r" id="mh"></div>
+                        </div>
+                        <div class="subwrap">
+                            <div class="info-l">Density</div>
+                            <div class="info-r" id="density"></div><br>
+                        </div>
+                    </div>
+                </div>
+                <div class="topicWrapper">
+                    <div class="topic">Summary</div>
+                    <div class="content" id="summary"></div>
+                </div>
                 <div class="topicWrapper">
                     <div class="topic">Configuration</div>
                     <div class="content" id="config"></div>
                 </div>
                 <div class="topicWrapper">
-                    <div class="topic">Basic info</div>
-                    <div class="content">WIP comeback soon :)</div>
+                    <div class="topic">Known Ionization Energies</div>
+                    <div class="content" id="Ie"></div>
                 </div>
 
             </div>
@@ -76,8 +114,8 @@
     </div>
 
 
-    <audio id="audio " src="click.mp3 "></audio>
-    <audio id="bgm " src="bgm.mp3 "></audio>
+    <audio id="audio" src="click.mp3"></audio>
+    <audio id="bgm" src="bgm.mp3"></audio>
 </body>
 
 </html>

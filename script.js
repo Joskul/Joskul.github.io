@@ -27,6 +27,7 @@ function pow(arr) {
     return out;
 }
 
+
 function update(sym, input) {
 
     var selected = document.getElementsByClassName("selected");
@@ -47,23 +48,39 @@ function update(sym, input) {
         }
     }
 
-    document.getElementById("mass_number").innerHTML = Math.round(elements[getNum(X) - 1].atomic_mass);
-    document.getElementById("atomic_number").innerHTML = elements[getNum(X) - 1].number;
-    document.getElementById("symbol").innerHTML = `<br><h1 style="color:#${intToRGB(hashCode(elements[getNum(X) - 1].category))}; text-shadow: 0px 0px 5px; ">` + getName(getNum(X)) + '</h1><br>'
-        /*subject to be updated
-    document.getElementById("name").innerHTML = elements[getNum(X) - 1].name;
-    document.getElementById("name").setAttribute('href', elements[getNum(X) - 1].source);
-    document.getElementById("info").innerHTML = elements[getNum(X) - 1].summary;
-    document.getElementById("boil").innerHTML = elements[getNum(X) - 1].boil + " K";
-    document.getElementById("melt").innerHTML = elements[getNum(X) - 1].melt + " K";
-    document.getElementById("density").innerHTML = elements[getNum(X) - 1].density;
-    */
-    if (elements[getNum(X) - 1].electron_configuration == elements[getNum(X) - 1].electron_configuration_semantic) {
-        document.getElementById("config").innerHTML = pow(elements[getNum(X) - 1].electron_configuration);
+    ptjs = elements[getNum(X) - 1];
+
+    document.getElementById("mass_number").innerHTML = Math.round(ptjs.atomic_mass);
+    document.getElementById("atomic_number").innerHTML = ptjs.number;
+    document.getElementById("symbol").innerHTML = `<br><h1 style="color:#${intToRGB(hashCode(ptjs.category))}; text-shadow: 0px 0px 5px; ">` + getName(getNum(X)) + '</h1><br>'
+    document.getElementById("elemname").innerHTML = ptjs.name;
+    document.getElementById("elemname").setAttribute('href', ptjs.source);
+    document.getElementById("category").innerHTML = ptjs.category;
+    document.getElementById("box").setAttribute('style', `background-color:#${intToRGB(hashCode(ptjs.category))};`);
+    document.getElementById("summary").innerHTML = ptjs.summary;
+
+    //general info
+    if (ptjs.electronegativity_pauling) document.getElementById("en").innerHTML = ptjs.electronegativity_pauling;
+    else document.getElementById("en").innerHTML = 'none';
+    if (ptjs.electron_affinity) document.getElementById("ea").innerHTML = ptjs.electron_affinity;
+    else document.getElementById("ea").innerHTML = 'none';
+    if (ptjs.melt) document.getElementById("mp").innerHTML = ptjs.melt;
+    else document.getElementById("mp").innerHTML = 'none';
+    if (ptjs.boil) document.getElementById("bp").innerHTML = ptjs.boil;
+    else document.getElementById("bp").innerHTML = 'none';
+    if (ptjs.density) document.getElementById("density").innerHTML = ptjs.density;
+    else document.getElementById("density").innerHTML = 'none';
+    if (ptjs.molar_heat) document.getElementById("mh").innerHTML = ptjs.molar_heat;
+    else document.getElementById("mh").innerHTML = 'none';
+
+    if (ptjs.electron_configuration == ptjs.electron_configuration_semantic) {
+        document.getElementById("config").innerHTML = pow(ptjs.electron_configuration);
     } else {
-        document.getElementById("config").innerHTML = pow(elements[getNum(X) - 1].electron_configuration) + '<br>or<br>' + pow(elements[getNum(X) - 1].electron_configuration_semantic)
+        document.getElementById("config").innerHTML = pow(ptjs.electron_configuration) + '<br>or<br>' + pow(ptjs.electron_configuration_semantic)
     }
-    document.getElementById("Ie").innerHTML = elements[getNum(X) - 1].ionization_energies.join(' ');
+
+    if (ptjs.ionization_energies.length != 0) document.getElementById("Ie").innerHTML = ptjs.ionization_energies.join('<br>');
+    else document.getElementById("Ie").innerHTML = "none";
 }
 
 function generateTable() {
@@ -108,9 +125,4 @@ function intToRGB(i) {
         .toUpperCase();
 
     return "00000".substring(0, 6 - c.length) + c;
-}
-
-function play() {
-    var audio = document.getElementById("audio");
-    audio.play();
 }
