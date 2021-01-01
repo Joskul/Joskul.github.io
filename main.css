@@ -3,6 +3,10 @@
     src: url('CodeSaver-Regular.otf');
 }
 
+body {
+    background: url(./bg.png);
+}
+
 * {
     font-family: codesaver;
 }
@@ -14,8 +18,9 @@
 input {
     height: 30px;
     margin-top: 0px;
-    border-radius: 4px;
+    border-radius: 2px;
     font-size: 30px;
+    border: 0px;
     color: #FF4200FF;
 }
 
@@ -63,12 +68,10 @@ table {
 }
 
 #items {
-    background-color: rgb(255, 254, 244);
     text-shadow: /* Outline 1 */
     -0.5px -0.5px 0 #5a5a5a5a, 0.5px -0.5px 0 #5a5a5a5a, -0.5px 0.5px 0 #5a5a5a5a, 0.5px 0.5px 0 #5a5a5a5a, -1px 0 0 #5a5a5a5a, 1px 0 0 #5a5a5a5a, 0 1px 0 #5a5a5a5a, 0 -1px 0 #5a5a5a5a;
-    border-style: solid;
+    border: 1px solid;
     border-radius: 4px;
-    border: 2px;
 }
 
 #items:hover {
@@ -117,11 +120,21 @@ table {
     padding-left: 10px;
 }
 
+a:link#elemname,
+a:visited#elemname,
+a:hover#elemname {
+    color: white;
+    font-size: 48px;
+    text-decoration: none;
+    display: inline-block;
+    font-variant: small-caps;
+    text-shadow: 0px 0px 5px;
+}
+
 a:link,
 a:visited,
 a:hover {
     color: white;
-    font-size: 48px;
     text-decoration: none;
     display: inline-block;
     font-variant: small-caps;
@@ -207,4 +220,16 @@ a:hover {
 
 canvas {
     display: inline-block;
+}
+
+footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #4B4B4BFF;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: center;
+    margin-top: 60px;
+    height: max-content;
 }

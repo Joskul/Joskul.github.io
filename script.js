@@ -111,13 +111,17 @@ function update(sym, input) {
     //nuclei
     ctx.beginPath();
     ctx.arc(canvas.width / 2, canvas.height / 2, size * 0.2, 0, 2 * Math.PI);
-    ctx.fillStyle = '#' + intToRGB(hashCode(ptjs.category));
+    if (ptjs.cpkhex != null) ctx.fillStyle = '#' + ptjs.cpkhex;
+    else ctx.fillStyle = 'black'
+    ctx.shadowColor = 'black';
+    ctx.shadowBlur = 4;
     ctx.fill();
 
     ctx.fillStyle = "white";
-    ctx.font = size / 4 + "px Arial";
+    ctx.font = size / 4 + "px codesaver";
     ctx.textAlign = "center";
     ctx.fillText(ptjs.symbol, canvas.width / 2, (canvas.height / 2) + size / 12);
+    ctx.shadowBlur = 0;
 
     //shells
     for (i = 0; i < ptjs.shells.length; i++) {
@@ -143,8 +147,8 @@ function generateTable() {
                     var newCell = document.createElement("td");
                     newCell.textContent = elements[g].symbol;
                     newCell.setAttribute('onclick', 'update("' + elements[g].symbol + '"); this.classList.add("selected");');
-                    if (elements[g].cpkhex == null) newCell.setAttribute('style', `color:transparent; text-shadow: 1px 1px 0px black; border:2px solid #${intToRGB(hashCode(elements[g].category))};`);
-                    else newCell.setAttribute('style', `color:#${elements[g].cpkhex}; border:2px solid #${intToRGB(hashCode(elements[g].category))};`);
+                    if (elements[g].cpkhex == null) newCell.setAttribute('style', `color:transparent; border: 2px solid #${intToRGB(hashCode(elements[g].category))}; text-shadow: 1px 1px 0px black; background-color: white;`);
+                    else newCell.setAttribute('style', `color: white; border: 2px solid #${intToRGB(hashCode(elements[g].category))}; text-shadow: 1px 1px 0px black; background-color: #${elements[g].cpkhex};`);
                     newCell.id = `items`;
                     newCell.classList.add(elements[g].symbol);
                     newRow.appendChild(newCell);
