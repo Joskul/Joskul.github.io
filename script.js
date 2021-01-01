@@ -28,6 +28,14 @@ function pow(arr) {
 }
 
 
+function setup() {
+    var options = '';
+    for (var i = 0; i < elements.length; i++)
+        options += '<option value="' + elements[i].symbol + '" />';
+    document.getElementById('elem').innerHTML = options;
+    generateTable();
+}
+
 function update(sym, input) {
 
     var selected = document.getElementsByClassName("selected");
@@ -52,7 +60,7 @@ function update(sym, input) {
 
     document.getElementById("mass_number").innerHTML = Math.round(ptjs.atomic_mass);
     document.getElementById("atomic_number").innerHTML = ptjs.number;
-    document.getElementById("symbol").innerHTML = `<br><h1 style="color:#${intToRGB(hashCode(ptjs.category))}; text-shadow: 0px 0px 5px; ">` + getName(getNum(X)) + '</h1><br>'
+    document.getElementById("symbol").innerHTML = `<br><h1 style="color:#${ptjs.cpkhex}; text-shadow: 0px 0px 5px; ">` + getName(getNum(X)) + '</h1><br>'
 
     document.getElementById("elemname").innerHTML = ptjs.name;
     document.getElementById("elemname").setAttribute('href', ptjs.source);
@@ -134,9 +142,11 @@ function generateTable() {
                 if (elements[g].ypos == i && elements[g].xpos == a) {
                     var newCell = document.createElement("td");
                     newCell.textContent = elements[g].symbol;
-                    newCell.setAttribute('onclick', 'update("' + elements[g].symbol + '"); this.className="selected";');
-                    newCell.setAttribute('style', `color:#${intToRGB(hashCode(elements[g].category))}`);
+                    newCell.setAttribute('onclick', 'update("' + elements[g].symbol + '"); this.classList.add("selected");');
+                    if (elements[g].cpkhex == null) newCell.setAttribute('style', `color:transparent; text-shadow: 1px 1px 0px black; border:2px solid #${intToRGB(hashCode(elements[g].category))};`);
+                    else newCell.setAttribute('style', `color:#${elements[g].cpkhex}; border:2px solid #${intToRGB(hashCode(elements[g].category))};`);
                     newCell.id = `items`;
+                    newCell.classList.add(elements[g].symbol);
                     newRow.appendChild(newCell);
                     console.log(elements[g].symbol);
                     break;

@@ -4,32 +4,13 @@
 <head>
     <title>Periodic Table Toolkit</title>
     <link rel="icon" href="favicon.ico">
-    <style>
-        @font-face {
-            font-family: codesaver;
-            src: url('CodeSaver-Regular.otf');
-        }
-        
-        * {
-            font-family: codesaver;
-        }
-    </style>
-    <script src="PeriodicTableJSON.js"></script>
-    <script>
-        function setup() {
-            var options = '';
-            for (var i = 0; i < elements.length; i++)
-                options += '<option value="' + elements[i].symbol + '" />';
-            document.getElementById('elem').innerHTML = options;
-            generateTable();
-        }
-    </script>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="PeriodicTableJSON.js"></script>
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body onload="setup(); update('H'); document.getElementById('bgm').play()" style="background-color:#4B4B4BFF;">
     <datalist id="elem"></datalist>
-    <script src="script.js"></script>
     <div class="table center" align=center border=0px id="content" style="background-color:#C4C4C4FF; width:80%;">
         <div class="tr" style="column-span:3">
             <div style="font-size:48px; text-align:center; color:#FF4200FF; background-color:rgb(31, 31, 31)">Periodic table toolkit</div>
@@ -42,7 +23,7 @@
                 Periodic table ▼
                 <div class="dropdown-content">
                     <table align=center border=2 class="notranslate">
-                        <b><tbody id="pdt" style="background-color:#C4C4C4FF; border:0px;"></tbody></b>
+                        <b><tbody id="pdt" style="background-color:#C4C4C4FF;"></tbody></b>
                     </table>
                 </div>
             </div>
