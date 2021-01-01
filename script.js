@@ -53,6 +53,7 @@ function update(sym, input) {
     document.getElementById("mass_number").innerHTML = Math.round(ptjs.atomic_mass);
     document.getElementById("atomic_number").innerHTML = ptjs.number;
     document.getElementById("symbol").innerHTML = `<br><h1 style="color:#${intToRGB(hashCode(ptjs.category))}; text-shadow: 0px 0px 5px; ">` + getName(getNum(X)) + '</h1><br>'
+
     document.getElementById("elemname").innerHTML = ptjs.name;
     document.getElementById("elemname").setAttribute('href', ptjs.source);
     document.getElementById("category").innerHTML = ptjs.category;
@@ -81,6 +82,47 @@ function update(sym, input) {
 
     if (ptjs.ionization_energies.length != 0) document.getElementById("Ie").innerHTML = ptjs.ionization_energies.join('<br>');
     else document.getElementById("Ie").innerHTML = "none";
+
+    //shells
+
+    document.getElementById("shells").innerHTML = ptjs.shells.join(' ') + "<br>";
+
+    var canvas = document.createElement('canvas');
+    canvas.setAttribute('width', document.getElementById("shells").clientWidth * 0.9);
+    canvas.setAttribute('height', document.getElementById("shells").clientWidth * 0.9);
+
+    var size = document.getElementById("shells").clientWidth * 0.9 / ptjs.shells.length;
+
+    ctx = canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, canvas.width / 2, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    //nuclei
+    ctx.beginPath();
+    ctx.arc(canvas.width / 2, canvas.height / 2, size * 0.2, 0, 2 * Math.PI);
+    ctx.fillStyle = '#' + intToRGB(hashCode(ptjs.category));
+    ctx.fill();
+
+    ctx.fillStyle = "white";
+    ctx.font = size / 4 + "px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(ptjs.symbol, canvas.width / 2, (canvas.height / 2) + size / 12);
+
+    //shells
+    for (i = 0; i < ptjs.shells.length; i++) {
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, ((i + 1) * size / 5) + size * 0.2, 0, 2 * Math.PI);
+        ctx.stroke();
+        for (a = 0; a < ptjs.shells[i]; a++) {
+            drawElectrons(canvas.width / 2, canvas.height / 2, ((i + 1) * size / 5) + size * 0.2, a * 360 / ptjs.shells[i] + 90, size / 20);
+        }
+    }
+
+    document.getElementById("shells").appendChild(canvas);
+
 }
 
 function generateTable() {
@@ -92,7 +134,7 @@ function generateTable() {
                 if (elements[g].ypos == i && elements[g].xpos == a) {
                     var newCell = document.createElement("td");
                     newCell.textContent = elements[g].symbol;
-                    newCell.setAttribute('onclick', 'update("' + elements[g].symbol + '"); this.className="selected"; document.getElementById("audio").play();');
+                    newCell.setAttribute('onclick', 'update("' + elements[g].symbol + '"); this.className="selected";');
                     newCell.setAttribute('style', `color:#${intToRGB(hashCode(elements[g].category))}`);
                     newCell.id = `items`;
                     newRow.appendChild(newCell);
@@ -111,7 +153,7 @@ function generateTable() {
     }
 }
 
-function hashCode(str) { // java String#hashCode
+function hashCode(str) {
     var hash = 0;
     for (var i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -125,4 +167,16 @@ function intToRGB(i) {
         .toUpperCase();
 
     return "00000".substring(0, 6 - c.length) + c;
+}
+
+function drawElectrons(x, y, length, angle, size) {
+    var radians = angle / 180 * Math.PI;
+    var endX = x + length * Math.cos(radians);
+    var endY = y - length * Math.sin(radians);
+
+    ctx.beginPath();
+    ctx.arc(endX, endY, size, 0, 2 * Math.PI);
+    ctx.fillStyle = "red";
+    ctx.fill();
+    ctx.closePath();
 }
